@@ -9,7 +9,7 @@ const HeaderBlock = ({ title, hideBackground = false, hideLogo = false, descr })
 			<div className={s.wrap}>
 	 			{ title && <h1 className={s.header}>{ title }</h1> }
 				{ hideLogo || <ReactLogoSvg/> }
-	 			{ descr && <p className={s.descr}>{ descr }</p> }
+	 			{ typeof descr ==  'object' ? <ul className={s.descr}>{descr.map(el => <li>{el}</li>)}</ul> : <p className={s.descr}>{ descr }</p> }
 			</div>
 		</div>
  	)

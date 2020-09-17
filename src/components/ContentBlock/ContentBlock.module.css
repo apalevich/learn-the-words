@@ -1,29 +1,14 @@
 .cover {
     width: 100%;
-    min-height: 100vh;
+    height: fit-content;
+    min-height: 50vh;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
     position: relative;
-    text-align: center;
-    
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: fixed;
-	background-color: #000;
-}
-
-.cover:after {
-    content: '';
-    display: block;
-    width: 100%;
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100vh;
-    background-image: linear-gradient(to top, rgba(26,40,120,0.70), rgba(10,143,196,0.70));
+    text-align: left;
+	background-color: rgba(26,40,120,1);
 }
 
 .cover .wrap {
@@ -33,10 +18,16 @@
     max-width: 1024px;
 }
 
+.cover img {
+    width: 30px;
+    text-align: inherit;
+}
+
 .cover .header {
     font-size: 68px;
     color: white;
-    padding: 24px 0;
+    padding: 0px 0 24px 0;
+    text-align: inherit;
 }
 
 .cover .descr {
@@ -44,4 +35,6 @@
     padding: 15px 0 30px 0;
     font-size: 20px;
     line-height: 1.55;
+    text-align: left;
+    text-align: inherit;
 }

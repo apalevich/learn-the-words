@@ -24,7 +24,7 @@
     top: 0;
     left: 0;
     height: 100vh;
-    background-image: linear-gradient(to top, rgba(26,40,120,0.70), rgba(10,143,196,0.70));
+    background-image: linear-gradient(to top, rgba(26,40,120,1), rgba(10,143,196,0.70));
 }
 
 .cover .wrap {
@@ -45,6 +45,10 @@
     padding: 15px 0 30px 0;
     font-size: 20px;
     line-height: 1.55;
+}
+
+.cover ul.descr {
+    list-style-type: none;
 }
 
 svg {
