@@ -1,19 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import HeaderBlock from './components/HeaderBlock';
+import ContentBlock from './components/ContentBlock';
+import FooterBlock from './components/FooterBlock';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <h3>Hello React! Glad to see</h3>
-      </header>
-    </div>
-  );
+const App = () => {
+	return (
+		<>
+			<HeaderBlock
+        title="Учите React онлайн"
+        descr = "Онлайн-марафон Зара Захарова"
+      />
+      <ContentBlock
+        text="Привет! Это учебная страница к уроку №2 онлайн-марафона Зара Захарова. Она показывает три компонента: хэдер, контент и футер. Каждый из них использует пропсы в качестве аргументов и собственные модули стилей. Всё вместе это собирается в файле App.js, который рендерится в точке входа — файле index.js. Ничего не забыл?"
+      />
+      <FooterBlock
+        title="Спасибо за вашу работу"
+        descr="Ждём новых уроков"
+      />
+		</>
+	);
 }
 
 export default App;
