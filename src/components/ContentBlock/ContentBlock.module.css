@@ -1,20 +1,20 @@
 .cover {
     width: 100%;
     height: fit-content;
-    min-height: 50vh;
+    /* min-height: 50vh; */
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
     position: relative;
-    text-align: left;
-	background-color: rgba(26,40,120,1);
+    text-align: center;
+	background-color: rgb(255, 255, 255);
 }
 
 .cover .wrap {
     position: relative;
     z-index: 1;
-    padding: 100px 16px;
+    padding: 90px 240px;
     max-width: 1024px;
 }
 
@@ -24,17 +24,18 @@
 }
 
 .cover .header {
-    font-size: 68px;
-    color: white;
-    padding: 0px 0 24px 0;
-    text-align: inherit;
+    font-size: 36px;
+    color: black;
+    padding: 0;
+    font-weight: 500;
+    /* text-align: inherit; */
 }
 
 .cover .descr {
-    color: white;
-    padding: 15px 0 30px 0;
-    font-size: 20px;
+    color: black;
+    padding: 0 0 30px 0;
+    font-size: 14px;
     line-height: 1.55;
-    text-align: left;
-    text-align: inherit;
+    /* text-align: cene; */
+    /* text-align: inherit; */
 }
