@@ -34,19 +34,6 @@
     max-width: 1024px;
 }
 
-.cover .header {
-    font-size: 68px;
-    color: white;
-    padding: 24px 0 0 0;
-}
-
-.cover .descr {
-    color: white;
-    padding: 15px 0 30px 0;
-    font-size: 20px;
-    line-height: 1.55;
-}
-
 .cover ul.descr {
     list-style-type: none;
 }
