@@ -4,24 +4,20 @@ import s from './CardList.module.css';
 
 class CardList extends Component {
     state = {
-        value: '',
-        label: ''
+        eng: '',
+        rus: ''
     }
     
     handleInputChange = (e) => {
-        this.setState({
-            value: e.target.value
-        })
+        const newState = {};
+        newState[e.target.name] = e.target.value;
+        this.setState(newState);
     }
 
     handleSubmitForm = (e) => {
         e.preventDefault();
-        this.setState(({value}) => {
-            return {
-                label: value,
-                value: ''
-            }
-        })
+        const { rus, eng } = this.state;
+        this.props.onAddedItem(rus, eng);
     }
 
     render() {
@@ -36,13 +32,28 @@ class CardList extends Component {
                     className={s.form}
                     onSubmit={this.handleSubmitForm}
                 >
+                    <label htmlFor="eng-word-input">
+                        Слово на английском
+                    </label>
                     <input 
                         onChange={this.handleInputChange}
-                        value={this.state.value}
+                        value={this.state.eng}
                         type="text"
+                        name="eng"
+                        id="eng-word-input"
+                    />
+                    <label htmlFor="rus-word-input">
+                        Перевод
+                    </label>
+                    <input 
+                        onChange={this.handleInputChange}
+                        value={this.state.rus}
+                        type="text"
+                        name="rus"
+                        id="rus-word-input"
                     />
                     <button>
-                        Add New Word
+                        Добавить карточку
                     </button>
                 </form>
                 <div className={s.root}>

@@ -71,7 +71,6 @@ class App extends Component {
   }
 
   handleDeletedItem = (id) => {
-    console.log(id);
     this.setState(({ wordArr }) => {
       const idx = wordArr.findIndex(item => item.id === id);
       const newWordArr = [
@@ -81,6 +80,20 @@ class App extends Component {
       return {
         wordArr: newWordArr,
       };
+    });
+  }
+
+  handleAddedItem = (rus, eng) => {
+    this.setState(({wordArr}) => {
+      const newWordArr = wordArr;
+      newWordArr.push({
+        eng: eng,
+        rus: rus,
+        id: +new Date(),
+      });
+      return {
+        wordArr: newWordArr
+      }
     });
   }
 
@@ -105,7 +118,7 @@ class App extends Component {
           descr = "Кликните по карточке, чтобы увидеть перевод. Чтобы закрыть перевод, кликните повторно"
           backgroundColor="#ededed"
         >
-          <CardList item={ wordArr } onDeletedItem={ this.handleDeletedItem }/>
+          <CardList item={ wordArr } onDeletedItem={ this.handleDeletedItem } onAddedItem={ this.handleAddedItem }/>
         </ContentBlock>
         <HeaderBlock hideBackground>
           <Header>
