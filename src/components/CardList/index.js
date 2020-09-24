@@ -1,61 +1,65 @@
 import React, {Component} from 'react';
+import getTranslateWord from '../../services/dictionary.js';
 import Card from '../Card';
+import { Input } from 'antd';
+
 import s from './CardList.module.css';
+
+const { Search } = Input;
 
 class CardList extends Component {
     state = {
-        eng: '',
-        rus: ''
+        value: '',
+        label: '',
+        isBusy: false,
     }
     
     handleInputChange = (e) => {
-        const newState = {};
-        newState[e.target.name] = e.target.value;
-        this.setState(newState);
+        this.setState({
+            value: e.target.value,
+        })
     }
 
-    handleSubmitForm = (e) => {
-        e.preventDefault();
-        const { rus, eng } = this.state;
-        this.props.onAddedItem(rus, eng);
+    getTheWord = async () => {
+        const { value } = this.state;
+        const getWord = await getTranslateWord(value);
+        const { text, translate } = getWord;
+        this.props.onAddedItem(translate, text);
+        this.setState(() => {
+            return {
+                label: `Добавлено: ${value} — ${getWord.translate}`,
+                value: '',
+                isBusy: false,
+            }
+        })
+    }
+
+    handleSubmitForm = async (currentValue) => {
+        this.setState({
+            isBusy: true,
+        }, this.getTheWord);
     }
 
     render() {
         const { item = [], onDeletedItem } = this.props;
-        
+        const { value, isBusy } = this.state;
+
         return (
             <>
                 <div>
                     { this.state.label }
                 </div>
-                <form
-                    className={s.form}
-                    onSubmit={this.handleSubmitForm}
-                >
-                    <label htmlFor="eng-word-input">
-                        Слово на английском
-                    </label>
-                    <input 
+                <div className={s.form}>
+                    <Search
+                        placeholder="Инглиш ворд"
+                        enterButton="Добавить для изучения"
+                        size="large"
+                        value={value}
                         onChange={this.handleInputChange}
-                        value={this.state.eng}
-                        type="text"
-                        name="eng"
-                        id="eng-word-input"
+                        onSearch={this.handleSubmitForm}
+                        loading={isBusy}
                     />
-                    <label htmlFor="rus-word-input">
-                        Перевод
-                    </label>
-                    <input 
-                        onChange={this.handleInputChange}
-                        value={this.state.rus}
-                        type="text"
-                        name="rus"
-                        id="rus-word-input"
-                    />
-                    <button>
-                        Добавить карточку
-                    </button>
-                </form>
+                </div>
                 <div className={s.root}>
                     {
                         item.map(({ rus, eng, id }) => (

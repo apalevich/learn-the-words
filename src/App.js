@@ -1,73 +1,49 @@
 import React, { Component } from 'react';
+import * as firebase from 'firebase';
+import { ReactComponent as ReactLogo} from './logo.svg';
+
 import HeaderBlock from './components/HeaderBlock';
 import Header from './components/Header';
 import Paragraph from './components/Paragraph';
 import ContentBlock from './components/ContentBlock';
 import CardList from './components/CardList';
 import FooterBlock from './components/FooterBlock';
-import { ReactComponent as ReactLogo} from './logo.svg';
 
-const wordsList = [
-  {
-      eng: 'between',
-      rus: 'между',
-      id: 1,
-  },
-  {
-      eng: 'high',
-      rus: 'высокий',
-      id: 2,
-  },
-  {
-      eng: 'really',
-      rus: 'действительно',
-      id: 3
-  },
-  {
-      eng: 'something',
-      rus: 'что-нибудь',
-      id: 4,
-  },
-  {
-      eng: 'most',
-      rus: 'большинство',
-      id: 5
-  },
-  {
-      eng: 'another',
-      rus: 'другой',
-      id: 6
-  },
-  {
-      eng: 'much',
-      rus: 'много',
-      id: 7
-  },
-  {
-      eng: 'family',
-      rus: 'семья',
-      id: 8
-  },
-  {
-      eng: 'own',
-      rus: 'личный',
-      id: 9
-  },
-  {
-      eng: 'out',
-      rus: 'из/вне',
-      id: 10
-  },
-  {
-      eng: 'leave',
-      rus: 'покидать',
-      id: 11
-  },
-];
+const firebaseConfig = {
+  apiKey: "AIzaSyBAsIzTSimfhhiTZef1jxYeg7pjRwlyGuw",
+  authDomain: "learn-the-words-501dd.firebaseapp.com",
+  databaseURL: "https://learn-the-words-501dd.firebaseio.com",
+  projectId: "learn-the-words-501dd",
+  storageBucket: "learn-the-words-501dd.appspot.com",
+  messagingSenderId: "453740325841",
+  appId: "1:453740325841:web:fd9b5b49b73338e06a8ef0"
+};
+firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
 
 class App extends Component {
   state = {
-    wordArr: wordsList
+    wordArr: [],
+  }
+
+  componentDidMount() {
+    database
+      .ref('/')
+      .once('value')
+      .then(res => {
+        this.setState({
+          wordArr: res.val(),
+        });
+      });
+  }
+
+  setNewWord = (eng, rus) => {
+    const { wordArr } = this.state;
+    database.ref('/').set([...wordArr, {
+      id: +new Date(),
+      eng: eng,
+      rus: rus,
+    }])
   }
 
   handleDeletedItem = (id) => {
@@ -77,6 +53,7 @@ class App extends Component {
         ...wordArr.slice(0, idx),
         ...wordArr.slice(idx + 1)
       ];
+      database.ref('/').set([...newWordArr]);
       return {
         wordArr: newWordArr,
       };
@@ -91,6 +68,7 @@ class App extends Component {
         rus: rus,
         id: +new Date(),
       });
+      database.ref('/').set([...newWordArr]);
       return {
         wordArr: newWordArr
       }
