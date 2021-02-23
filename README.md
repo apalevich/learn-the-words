@@ -1,3 +1,7 @@
+React Study project (made with [Severenit](https://github.com/Severenit))
+
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
